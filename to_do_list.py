@@ -35,10 +35,9 @@ def showList(main_list):
             print('%s.%s'%((i+1),item['name']))
 def addItem(main_list):
     initTitle('Add item:')
-    addTip('Type new item name or press \'Enter\' x3 to exit')
-    user_input=''
-    exit_loop=0
-    while user_input=='':
+    addTip('Type new item name or press \'Enter\' to exit')
+    exit_loop=False
+    while not exit_loop:
         user_input=input('Type name:')
         if user_input!='':
             item_id=(len(main_list)+1)
@@ -46,30 +45,26 @@ def addItem(main_list):
             new_item=dict(id=item_id,name=item_name)
             main_list.append(new_item)
             initTitle('(>>>Item added<<<)')
+            exit_loop=True
         else:
-            exit_loop+=1
             addTip('Input name is empty!')
-            if exit_loop==3:
-                break
+            exit_loop=True
 def editItem(main_list):
     initTitle('Edit item:')
     list_empty=listEmpty(main_list)
     if list_empty:
         pass
     else:
-        addTip('Type item number or press \'Enter\' x3 to exit')
-        user_input=''
-        exit_loop=0
-        while user_input=='':
+        addTip('Type item number or press \'Enter\' to exit')
+        exit_loop=False
+        while not exit_loop:
             user_input=input('Type number:')
             if user_input!='':
                 try:
                     search_num=int(user_input)
                     list_len=len(main_list)
                     if search_num>list_len or search_num==0:
-                        addTip('Item not in list!')
-                        user_input=''
-                        exit_loop=0
+                        addTip('Item not in list. List has '+str(list_len)+' items.')
                     else:
                         i=0
                         while i<list_len:
@@ -77,39 +72,37 @@ def editItem(main_list):
                             if search_num==item['id']:
                                 initTitle('Old item:\''+str(item['id'])+'.'+item['name']+'\'')
                                 new_item_name=input('New name:')
-                                item['name']=new_item_name.strip()
-                                initTitle('(>>>Item edited<<<)')
+                                if new_item_name=='':
+                                    addTip('Input name is empty!')
+                                    exit_loop=True
+                                else:
+                                    item['name']=new_item_name.strip()
+                                    initTitle('(>>>Item edited<<<)')
+                                    exit_loop=True
                                 break
                             else:
                                 i+=1
                 except ValueError:
                     addTip('ERROR:Must be number!')
-                    user_input=''
-                    exit_loop=0
             else:
-                exit_loop+=1
                 addTip('Input number is empty!')
-                if exit_loop==3:
-                    break
+                exit_loop=True
 def removeItem(main_list):
     initTitle('Remove item:')
     list_empty=listEmpty(main_list)
     if list_empty:
         pass
     else:
-        addTip('Type item number or press \'Enter\' x3 to exit')
-        user_input=''
-        exit_loop=0
-        while user_input=='':
+        addTip('Type item number or press \'Enter\' to exit')
+        exit_loop=False
+        while not exit_loop:
             user_input=input('Type number:')
             if user_input!='':
                 try:
                     search_num=int(user_input)
                     list_len=len(main_list)
                     if search_num>list_len or search_num==0:
-                        addTip('Item not in list!')
-                        user_input=''
-                        exit_loop=0
+                        addTip('Item not in list. List has '+str(list_len)+' items.')
                     else:
                         i=0
                         while i<list_len:
@@ -124,17 +117,14 @@ def removeItem(main_list):
                                 i=i
                                 search_num=0
                                 initTitle('(>>>Item removed<<<)')
+                                exit_loop=True
                             else:
                                 i+=1
                 except ValueError:
                     addTip('ERROR:Must be number!')
-                    user_input=''
-                    exit_loop=0
             else:
-                exit_loop+=1
                 addTip('Input number is empty!')
-                if exit_loop==3:
-                    break
+                exit_loop=True
 def exitApp(main_list):
     i=0
     list_len=len(main_list)
