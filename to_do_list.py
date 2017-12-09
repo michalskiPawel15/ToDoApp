@@ -43,7 +43,7 @@ def addItem(main_list):
         if user_input!='':
             item_id=(len(main_list)+1)
             item_name=user_input.strip()
-            new_item={'id':item_id,'name':item_name}
+            new_item=dict(id=item_id,name=item_name)
             main_list.append(new_item)
             initTitle('(>>>Item added<<<)')
         else:
@@ -77,7 +77,7 @@ def editItem(main_list):
                             if search_num==item['id']:
                                 initTitle('Old item:\''+str(item['id'])+'.'+item['name']+'\'')
                                 new_item_name=input('New name:')
-                                item['name']=new_item_name
+                                item['name']=new_item_name.strip()
                                 initTitle('(>>>Item edited<<<)')
                                 break
                             else:
@@ -184,6 +184,13 @@ def openList(file_mode,append_str=None):
             for file_line in file:
                 line=file_line.strip('\n')
                 line_list=line.split('.')
+                list_len=len(line_list)
+                i=2
+                while i<list_len:
+                    line_list[1]+='.'+line_list[i]
+                    line_list.remove(line_list[i])
+                    list_len=len(line_list)
+                    i=i
                 try:
                     txt_line=str(line_list[1])
                     int_line=int(line_list[0])
@@ -200,7 +207,7 @@ def openList(file_mode,append_str=None):
             initTitle('File created')
     return main_list
 def listApp():
-    initTitle('---To Do list App---')
+    initTitle('---List App---')
     options={
         'l':{'name':'List','func':showList},
         'a':{'name':'Add','func':addItem},
