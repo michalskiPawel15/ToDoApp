@@ -207,7 +207,7 @@ def openList(file_mode,append_str=None):
             initTitle('File created')
     return main_list
 def listApp():
-    initTitle('---List App---')
+    initTitle('---To Do list App---')
     options={
         'l':{'name':'List','func':showList},
         'a':{'name':'Add','func':addItem},
