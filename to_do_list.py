@@ -149,6 +149,7 @@ def exitApp(main_list):
         i+=1
     openList('w',main_str)
     initTitle('Exit app')
+    exit()
 def showOptions(options):
     initTitle('Options:')
     opt_i=0
