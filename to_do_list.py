@@ -7,7 +7,7 @@ def initTitle(title_str=None):
     else:
         title_str = str(title_str)
         hr_line = len(title_str) * '-'
-        print('%s\n%s\n%s' % (hr_line, title_str, hr_line))
+    print('%s\n%s\n%s' % (hr_line, title_str, hr_line))
 
 
 def addTip(tip_str=None):
@@ -16,7 +16,7 @@ def addTip(tip_str=None):
     else:
         tip_str = '('+str(tip_str)+')'
         hr_line = len(tip_str) * '-'
-        print('%s\n%s' % (tip_str, hr_line))
+    print('%s\n%s' % (tip_str, hr_line))
 
 
 def listEmpty(some_list):
